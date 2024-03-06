@@ -1,6 +1,7 @@
 package com.icfes.icfes.controllers;
 
 
+import com.icfes.icfes.dto.ProductDto;
 import com.icfes.icfes.models.Product;
 import com.icfes.icfes.repositories.Impl.ProductImpl;
 import org.apache.coyote.BadRequestException;
@@ -17,19 +18,19 @@ public class ProductController {
     @Autowired
     ProductImpl productImpl;
     @PostMapping(value = "/create")
-    public ResponseEntity<?> createProduct(@RequestBody Product product){
+    public ResponseEntity<?> createProduct(@RequestBody ProductDto product){
         Product p = productImpl.createProduct(product);
         return ResponseEntity.ok(p);
     }
 
     @GetMapping(value = "/list")
-    public ResponseEntity<List<Product>> getProduct(){
-        List<Product> response= productImpl.getProduct();
+    public ResponseEntity<List<ProductDto>> getProduct(){
+        List<ProductDto> response= productImpl.getProduct();
         return ResponseEntity.ok(response);
     }
 
     @PutMapping(value = "/update/{id}")
-    public ResponseEntity<?> updateProduct(@PathVariable Long id, @RequestBody Product product){
+    public ResponseEntity<?> updateProduct(@PathVariable Long id, @RequestBody ProductDto product){
         Product response= null;
         try {
             response = productImpl.updateProduct(id, product);
